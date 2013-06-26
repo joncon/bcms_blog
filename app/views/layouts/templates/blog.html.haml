@@ -1,0 +1,13 @@
+-content_for :main_content do
+  .banner.blog
+    .title-block
+      %h1 Seismo Blog
+      %h2 Updates and dispatches from the PNSN
+  =render "shared/top_nav"
+  #tier-content-col-left
+    .cms
+      =container :main
+  #tier-content-col-right
+    =render "shared/quick_links"
+    = render "/partials/blog_recent_and_archives"
+=render :file => "layouts/application"
