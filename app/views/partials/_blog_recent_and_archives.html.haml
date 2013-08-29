@@ -12,7 +12,7 @@
       %li.depth-1.year-of-posts{ :class => i==0 ? 'current-year' : '' }
         = link_to "#{year_post.pub_year} (#{year_post.count})", "#"
         %ul.depth-2
-          -BcmsBlog::BlogPost. select("to_char(published_at, 'month') as pub_month, date_part('month',published_at) as int_month, count(*) as count").where("published = true AND date_part('year', published_at) =?", year_post.pub_year).group("pub_month, int_month").order("int_month DESC").each do |month_post|
+          -BcmsBlog::BlogPost.select("to_char(published_at, 'month') as pub_month, date_part('month',published_at) as int_month, count(*) as count").where("published = true AND date_part('year', published_at) =?", year_post.pub_year).group("pub_month, int_month").order("int_month DESC").each do |month_post|
             %li.depth-2
               = link_to "#{month_post.pub_month.titleize} (#{month_post.count})", '#'
               %ul.depth-3
