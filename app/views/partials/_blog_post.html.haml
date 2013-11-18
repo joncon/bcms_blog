@@ -37,7 +37,7 @@
     #post_comments
       %span.disqus-config{'data-disqus-article-id' => blog_post.slug, 'data-disqus-development' => Rails.env.development? ? 1 :0}
       #disqus_thread
-        =javascript_include_tag "disqus"     
+        =#javascript_include_tag "disqus"     
         =#javascript_include_tag "disqus_comment_count"     
     -if latest_post
       #latest-post-end
