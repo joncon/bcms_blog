@@ -17,5 +17,4 @@
               = link_to "#{month_post.pub_month.titleize} (#{month_post.count})", '#'
               %ul.depth-3
                 -BcmsBlog::BlogPost.where("published=true AND date_part('month', published_at) = ? AND date_part('year', published_at) =?", month_post.int_month, year_post.pub_year).order("published_at DESC").each do |post|
-                  %li
-                    =link_to post.name, blog_post_path(post), :class => 'no-slide'
+                  %li= link_to post.name, _blog_post_path(post), :class => 'no-slide'
