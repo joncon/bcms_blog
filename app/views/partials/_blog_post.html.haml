@@ -30,14 +30,14 @@
           %span.tags
             = blog_post.tags.map{|t| link_to(h(t.name), _blog_path(blog_post.blog, 'posts_with_tag', :tag => t.name)) }.join(", ")
     .comment-link
-      /%a{:href => "#discus_thread", "data-disqus-indentifier" =>  "#{blog_post.slug}"} Post a comment
+      %a{:href => "#discus_thread", "data-disqus-indentifier" =>  "#{blog_post.slug}"} Post a comment
       =#image_tag('comment.png')
       /Show comments
     =# link_to "Post a comment", "#{_blog_post_path(blog_post)}#comments" if showing_individual_post
     #post_comments
       %span.disqus-config{'data-disqus-article-id' => blog_post.slug, 'data-disqus-development' => Rails.env.development? ? 1 :0}
       #disqus_thread
-        =#javascript_include_tag "disqus"     
+        =javascript_include_tag "disqus"     
         =#javascript_include_tag "disqus_comment_count"     
     -if latest_post
       #latest-post-end
