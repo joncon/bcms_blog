@@ -3,5 +3,6 @@
     .cms
       =container :main
   #tier-content-col-right
-    =render "/partials/blog_recent_and_archives"
+    -cache(["blog_archive_menu", last_updated_blog_post]) do
+      =render "/partials/blog_recent_and_archives"
 =render :file => "layouts/application"
