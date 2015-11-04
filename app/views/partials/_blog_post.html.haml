@@ -1,10 +1,11 @@
--# _counter is defined only if we pass :collection to the partial
--cache(["blog_posts", last_updated_blog_post]) do
-  -if defined?(blog_post_counter)
-    -showing_individual_post = false
-  -else
-    -showing_individual_post = true
-    -blog_post_counter = 0
+-# _counter is defined only if we pass :collection to the partial. Include counter in caching call so we can 
+-# cache summary state of index page and full state of show page
+-if defined?(blog_post_counter)
+  -showing_individual_post = false
+-else
+  -showing_individual_post = true
+  -blog_post_counter = 0
+-cache([(blog_post, last_updated_blog_post, blog_post_counter]) do
   -unless defined?(@first_post_as_summary)
     -latest_post = (@blog_posts.first == blog_post) if @blog_posts
   .content.blog
