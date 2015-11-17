@@ -5,7 +5,7 @@
 -else
   -showing_individual_post = true
   -blog_post_counter = 0
--cache([(blog_post, last_updated_blog_post, blog_post_counter]) do
+-cache([blog_post, last_updated_blog_post, blog_post_counter]) do
   -unless defined?(@first_post_as_summary)
     -latest_post = (@blog_posts.first == blog_post) if @blog_posts
   .content.blog
