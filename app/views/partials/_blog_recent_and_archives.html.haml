@@ -1,32 +1,30 @@
-.col-xs-15
-  .recent-posts.panel
-    %h2.panel-heading{href:"#recent-posts-body", data:{toggle:"collapse"}}
-      Recent Posts
-      %i.plot-chevron-down.fa.fa-chevron-down.pull-right
-    #recent-posts-body.panel-body.collapse.in
-      %ul.no-decoration
-        -BcmsBlog::Blog.find(1).posts.order("published_at desc").limit(10).each do |post|
-          %li=link_to post.name, seismo_blog_post_path(post.route_params)
-          %li.divider
+.recent-posts.dropdown.blog-nav.pull-right
+  %button.btn.btn-default.dropdown-toggle{type:"button", data:{toggle:"dropdown"}}
+    Recent Posts
+    .fa.fa-chevron-down
+    
+  %ul.dropdown-menu
+    -BcmsBlog::Blog.find(1).posts.order("published_at desc").limit(10).each do |post|
+      %li=link_to post.name, seismo_blog_post_path(post.route_params)
+        
 
-.col-xs-15
-  .panel.secondary-nav
-    %h2.panel-heading{href:"#archive-body", data:{toggle:"collapse"}}
-      Archives
-      %i.plot-chevron-down.fa.fa-chevron-down.pull-right
-    #archive-body.panel-body.collapse
-      %ul.depth-1.no-decoration
-        -BcmsBlog::BlogPost.select("date_part('year', published_at) as pub_year, count(*)").where("published=true").group("pub_year").order("pub_year DESC").each_with_index do |year_post, i|
-          %li.depth-1.year-of-posts{ :class => i==0 ? 'current-year' : '' }
-            %a{href:"#"}
-              #{year_post.pub_year}
-              %span.badge #{year_post.count}
-            %ul.depth-2
-              -BcmsBlog::BlogPost.select("to_char(published_at, 'month') as pub_month, date_part('month',published_at) as int_month, count(*) as count").where("published = true AND date_part('year', published_at) =?", year_post.pub_year).group("pub_month, int_month").order("int_month DESC").each do |month_post|
-                %li.depth-2
-                  %a{href:"#"}
-                    #{month_post.pub_month.titleize}
-                    %span.badge #{month_post.count}
-                  %ul.depth-3
-                    -BcmsBlog::BlogPost.where("published=true AND date_part('month', published_at) = ? AND date_part('year', published_at) =?", month_post.int_month, year_post.pub_year).order("published_at DESC").each do |post|
-                      %li= link_to post.name, seismo_blog_post_path(post.route_params), :class => 'no-slide'
+.archives.dropdown.secondary-nav.blog-nav.pull-right
+  %button.btn.btn-default.dropdown-toggle{type:"button", data:{toggle:"dropdown"}}
+    Archives
+    .fa.fa-chevron-down
+
+  %ul.depth-1.no-decoration.dropdown-menu
+    -BcmsBlog::BlogPost.select("date_part('year', published_at) as pub_year, count(*)").where("published=true").group("pub_year").order("pub_year DESC").each_with_index do |year_post, i|
+      %li.depth-1.year-of-posts{ :class => i==0 ? 'current-year' : '' }
+        %a{href:"#"}
+          #{year_post.pub_year}
+          %span.badge #{year_post.count}
+        %ul.depth-2.no-decoration
+          -BcmsBlog::BlogPost.select("to_char(published_at, 'month') as pub_month, date_part('month',published_at) as int_month, count(*) as count").where("published = true AND date_part('year', published_at) =?", year_post.pub_year).group("pub_month, int_month").order("int_month DESC").each do |month_post|
+            %li.depth-2
+              %a{href:"#"}
+                #{month_post.pub_month.titleize}
+                %span.badge #{month_post.count}
+              %ul.depth-3.no-decoration
+                -BcmsBlog::BlogPost.where("published=true AND date_part('month', published_at) = ? AND date_part('year', published_at) =?", month_post.int_month, year_post.pub_year).order("published_at DESC").each do |post|
+                  %li= link_to post.name, seismo_blog_post_path(post.route_params), :class => 'no-slide'

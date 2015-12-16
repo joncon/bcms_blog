@@ -1,8 +1,8 @@
 -content_for :narrow_page do
-  #blog-nav.col-xs-15.col-sm-4.col-sm-push-11
-    -cache(["blog_archive_menu", last_updated_blog_post]) do
-      =render "/partials/blog_recent_and_archives"
-  #blogs.col-xs-15.col-sm-11.col-sm-pull-4
-    .cms
-      =container :main
+  -cache(["blog_archive_menu", last_updated_blog_post]) do
+    =render "/partials/blog_recent_and_archives"
+  .cms.blog
+    =container :main
+
 =render :file => "layouts/application"
+
