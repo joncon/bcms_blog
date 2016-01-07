@@ -1,3 +1,6 @@
+-content_for :bread_crumbs do 
+  -cache_public(["breadcrumbs","blog", blog_post]) do
+    =render_breadcrumbs({})
 -content_for :narrow_page do
   -cache(["blog_archive_menu", last_updated_blog_post]) do
     =render "/partials/blog_recent_and_archives"
