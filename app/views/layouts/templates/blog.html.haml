@@ -1,5 +1,8 @@
 -content_for :bread_crumbs do 
-  %p
+  %ol.breadcrumb
+    %li.first.home=link_to "PNSN", "/"
+    %li=link_to "Blog", "/blog"
+
 -content_for :narrow_page do
   -cache(["blog_archive_menu", last_updated_blog_post]) do
     =render "/partials/blog_recent_and_archives"
